@@ -1,5 +1,8 @@
 **Bhuvan comments**
 
+github login integration enabled.
+localhost certificates self-signed and added to certs.
+
 To generate public-private key pair make a GET request to:
 ## https://localhost:3000/generate/key?name=bhuvan
 

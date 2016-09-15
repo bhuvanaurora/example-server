@@ -50,6 +50,11 @@ exports.downloadPrivateKey = (req, res) => {
 		if(existingKey.keyD) return res.json({'message': 'You have downloaded the private key already.'});
 
 		var filePath = './genKeys/' + name + '/privkey.pem';
-		res.download(filePath);
+
+		existingKey.keyD = true;
+		existingKey.save((err) => {
+			if(err) return res.json(err);
+			return res.download(filePath);
+		});
 	});
 }

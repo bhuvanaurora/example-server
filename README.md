@@ -3,7 +3,7 @@
 github login integration enabled.
 localhost certificates self-signed and added to certs.
 
-To generate public-private key pair make a GET request to:
+To generate public-private key pair make a GET request to the following. Pass the name as parameter.:
 ## https://localhost:3000/generate/key?name=bhuvan
 
 To download the private key make a GET request to (you should use your browser to download the key):

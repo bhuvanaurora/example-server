@@ -34,6 +34,7 @@ const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const keygenController = require('./controllers/keygen');
 
 /**
  * API keys and Passport configuration.
@@ -213,6 +214,12 @@ app.get('/auth/pinterest/callback', passport.authorize('pinterest', { failureRed
 });
 
 /**
+ * RSA Key generation route.
+ */
+app.get('/generate/key', keygenController.index);
+app.get('/generate/download', keygenController.downloadPrivateKey);
+
+/**
  * Error Handler.
  */
 app.use(errorHandler());
@@ -223,8 +230,8 @@ app.use(errorHandler());
 
 // SSL config
 var options = {
-	    key: fs.readFileSync('./localhost.key').toString(),
-		cert: fs.readFileSync('./localhost.crt').toString(),
+	    key: fs.readFileSync('./certs/localhost.key').toString(),
+		cert: fs.readFileSync('./certs/localhost.crt').toString(),
 		ciphers: 'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES256-SHA384',
 		honorCipherOrder: true,
 		secureProtocol: 'TLSv1_2_method'

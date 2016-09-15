@@ -9,6 +9,11 @@ This will add the self-signed certificate to the keychain.
 
 Added code to app.js. https can now be accessed.
 
+To generate public-private key pair make a GET request to:
+## https://localhost:3000/generate/key?name=bhuvan
+
+To download the private key make a GET request to:
+## https://localhost:3000/generate/download?name=bhuvan
 
 
 Example Server

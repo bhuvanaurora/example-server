@@ -19,6 +19,8 @@ const expressValidator = require('express-validator');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
+const fs = require('fs');
+const https = require('https');
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -218,7 +220,18 @@ app.use(errorHandler());
 /**
  * Start Express server.
  */
-app.listen(app.get('port'), () => {
+
+// SSL config
+var options = {
+	    key: fs.readFileSync('./localhost.key').toString(),
+		cert: fs.readFileSync('./localhost.crt').toString(),
+		ciphers: 'ECDHE-RSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA:ECDHE-RSA-AES256-SHA384',
+		honorCipherOrder: true,
+		secureProtocol: 'TLSv1_2_method'
+};
+
+var server = https.createServer(options, app);
+server.listen(app.get('port'), () => {
   console.log('%s Express server listening on port %d in %s mode.', chalk.green('✓'), app.get('port'), app.get('env'));
 });
 

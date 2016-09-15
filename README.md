@@ -1,3 +1,16 @@
+**Bhuvan comments**
+
+To generate a self-signed certificate on mac osx:
+## openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
+
+In root directory of the folder, use:
+## sudo security add-trusted-cert -p ssl -d -r trustRoot -k ~/Library/Keychains/login.keychain localhost.crt
+This will add the self-signed certificate to the keychain.
+
+Added code to app.js. https can now be accessed.
+
+
+
 Example Server
 =======================
 
